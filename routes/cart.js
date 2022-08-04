@@ -1,5 +1,5 @@
 import express from "express";
-import { addToCart, getCartItems } from "../controllers/cart";
+import { addToCart, getCartItems, removeFromCart } from "../controllers/cart";
 import { requireSignin } from "../middlewares";
 
 const router = express.Router();
@@ -19,6 +19,6 @@ router.route("/add").post(requireSignin, addToCart);
 // @desc Remove from cart
 // @route POST /api/cart/remove
 // @access Private
-// router.route('/remove').put(requireSignin,removeFromCart)
+router.route("/remove").put(requireSignin, removeFromCart);
 
 export default router;

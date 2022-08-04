@@ -29,11 +29,4 @@ router.route("/:id/pay").post(requireSignin, updateOrderToPaid);
 // @access Private
 router.route("/").get(requireSignin, getAllOrders);
 
-// @desc GET razorpay key id
-// @route GET /api/order/get-razorpay-key
-// @access Private
-router.route("/get-razorpay-key").get(requireSignin, (req, res) => {
-  res.send({ key: process.env.RAZORPAY.KEY.ID });
-});
-
 export default router;
