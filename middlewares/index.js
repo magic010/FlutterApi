@@ -1,24 +1,24 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user";
 
-export const requireSignin = (req, res, next) => {
-  let fullToken = req.headers.authorization
+export const requireSignin = async (req, res, next) => {
+  let fullToken = req.headers.authorization;
   let token;
-  if (fullToken && fullToken.startsWith('Bearer')) {
+  if (fullToken && fullToken.startsWith("Bearer")) {
     try {
-      token = fullToken.split(' ')[1]
-      let decoded = jwt.verify(token, process.env.JWT_SECRET)
-      req.user = await User.findById(decoded.id).select('-password') //return everything except the password
+      token = fullToken.split(" ")[1];
+      let decoded = jwt.verify(token, process.env.JWT_SECRET);
+      req.user = await User.findById(decoded.id).select("-password");
     } catch (error) {
-      res.status(401).json({ message: 'Not authorized' })
-      throw new Error('Invalid token')
+      res.status(401).json({ message: "Not authorized" });
+      throw new Error("Invalid token");
     }
   }
   if (!token) {
-    res.status(401)
-    throw new Error('No token found')
+    res.status(401);
+    throw new Error("No token found");
   }
-  next()
+  next();
 };
 
 export const isAuth = (req, res, next) => {
