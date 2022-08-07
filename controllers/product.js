@@ -86,6 +86,34 @@ export const createProduct = asyncHandler(async (req, res) => {
   }
 });
 
+export const createMultipleProducts = asyncHandler(async (req, res) => {
+  const products = req.body.products;
+  const createdProducts = [];
+  for (let i = 0; i < products.length; i++) {
+    const { name, image, brand, category, description, price, countInStock } =
+      products[i];
+    const product = new Product({
+      user: req.user._id,
+      name: name,
+      image: image,
+      brand: brand,
+      category: category,
+      description: description,
+      price: price,
+      countInStock: countInStock,
+    });
+
+    try {
+      const createdProduct = await product.save();
+      createdProducts.push(createdProduct);
+    } catch (error) {
+      res.status(400).json({ message: "Product creation failed" });
+    }
+  }
+  res.json({ message: "Products created successfully", createdProducts });
+}
+  
+
 // @desc Update product by id
 // @route PUT /api/admin/products/:id
 // @access Private/Admin

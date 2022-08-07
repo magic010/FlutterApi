@@ -5,6 +5,7 @@ import {
   getAllProductsAdmin,
   getProductByIdAdmin,
   updateProductByAdmin,
+  createMultipleProducts,
 } from "../controllers/product";
 
 import {
@@ -51,5 +52,7 @@ router
   .delete(requireSignin, isAdmin, deleteProduct)
   .get(requireSignin, isAdmin, getProductByIdAdmin)
   .put(requireSignin, isAdmin, updateProductByAdmin);
+
+router.route("/product").post(requireSignin, isAdmin, createMultipleProducts);
 
 export default router;
