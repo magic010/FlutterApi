@@ -63,12 +63,12 @@ export const getProductByIdAdmin = asyncHandler(async (req, res) => {
 // @route POST /api/admin/products
 // @access Private/Admin
 export const createProduct = asyncHandler(async (req, res) => {
-  const { name, image, brand, category, description, price, countInStock } =
+  const { name, images, brand, category, description, price, countInStock } =
     req.body.productData;
   const product = new Product({
     user: req.user._id,
     name: name,
-    image: image,
+    images: images,
     brand: brand,
     category: category,
     description: description,
@@ -90,12 +90,12 @@ export const createMultipleProducts = asyncHandler(async (req, res) => {
   const products = req.body.products;
   const createdProducts = [];
   for (let i = 0; i < products.length; i++) {
-    const { name, image, brand, category, description, price, countInStock } =
+    const { name, images, brand, category, description, price, countInStock } =
       products[i];
     const product = new Product({
       user: req.user._id,
       name: name,
-      image: image,
+      images: images,
       brand: brand,
       category: category,
       description: description,
@@ -117,14 +117,14 @@ export const createMultipleProducts = asyncHandler(async (req, res) => {
 // @route PUT /api/admin/products/:id
 // @access Private/Admin
 export const updateProductByAdmin = asyncHandler(async (req, res) => {
-  const { name, image, brand, category, description, price, countInStock } =
+  const { name, images, brand, category, description, price, countInStock } =
     req.body.productData;
 
   const product = await Product.findById(req.params.id);
 
   if (product) {
     product.name = name;
-    product.image = image;
+    product.images = images;
     product.brand = brand;
     product.category = category;
     product.description = description;
