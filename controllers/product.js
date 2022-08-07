@@ -111,8 +111,7 @@ export const createMultipleProducts = asyncHandler(async (req, res) => {
     }
   }
   res.json({ message: "Products created successfully", createdProducts });
-}
-  
+});
 
 // @desc Update product by id
 // @route PUT /api/admin/products/:id
