@@ -166,10 +166,10 @@ export const updateProductByAdmin = asyncHandler(async (req, res) => {
 });
 
 export const getBrands = asyncHandler(async (req, res) => {
-  const brands = await Product.distinct("brand");
+  const brands = await Product.find().distinct("brand");
   res.json(brands);
 });
 export const getCategories = asyncHandler(async (req, res) => {
-  const categories = await Product.distinct("category");
+  const categories = await Product.find().distinct("category");
   res.json(categories);
 });

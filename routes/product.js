@@ -19,12 +19,11 @@ router.route("/").get(getAllProducts);
 // @access Public
 router.route("/").get();
 
+router.route("/brands").get(getBrands);
+router.route("/categories").get(getCategories);
 // @desc Fetch a product
 // @route GET /api/products/:id
 // @access Public
 router.route("/:id").get(getProductById);
-
-router.route("/brands").get();
-router.route("/categories").get();
 
 export default router;
