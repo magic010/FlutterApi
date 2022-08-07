@@ -1,5 +1,10 @@
 import express from "express";
-import { getAllProducts, getProductById } from "../controllers/product";
+import {
+  getAllProducts,
+  getProductById,
+  getBrands,
+  getCategories,
+} from "../controllers/product";
 const router = express.Router();
 
 //express-async-handler eliminates the repeated use of trycatch blocks
@@ -18,5 +23,8 @@ router.route("/").get();
 // @route GET /api/products/:id
 // @access Public
 router.route("/:id").get(getProductById);
+
+router.route("/brands").get();
+router.route("/categories").get();
 
 export default router;

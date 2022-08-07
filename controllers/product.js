@@ -164,3 +164,12 @@ export const updateProductByAdmin = asyncHandler(async (req, res) => {
     res.status(404).json({ message: "Product not found" });
   }
 });
+
+export const getBrands = asyncHandler(async (req, res) => {
+  const brands = await Product.distinct("brand");
+  res.json(brands);
+});
+export const getCategories = asyncHandler(async (req, res) => {
+  const categories = await Product.distinct("category");
+  res.json(categories);
+});
