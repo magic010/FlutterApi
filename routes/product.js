@@ -2,7 +2,7 @@ import express from "express";
 import {
   getAllProducts,
   getProductById,
-  getBrands,
+  getBrandsAndThumbnails,
   getCategories,
 } from "../controllers/product";
 const router = express.Router();
@@ -19,7 +19,7 @@ router.route("/").get(getAllProducts);
 // @access Public
 router.route("/").get();
 
-router.route("/brands").get(getBrands);
+router.route("/brands").get(getBrandsAndThumbnails);
 router.route("/categories").get(getCategories);
 // @desc Fetch a product
 // @route GET /api/products/:id

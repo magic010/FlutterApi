@@ -169,6 +169,12 @@ export const getBrands = asyncHandler(async (req, res) => {
   const brands = await Product.find().distinct("brand");
   res.json(brands);
 });
+
+export const getBrandsAndThumbnails = asyncHandler(async (req, res) => {
+  const brands = await Product.find().distinct("brand");
+  const thumbnails = await Product.find().distinct("thumbnail");
+  res.json({ brands, thumbnails });
+});
 export const getCategories = asyncHandler(async (req, res) => {
   const categories = await Product.find().distinct("category");
   res.json(categories);
