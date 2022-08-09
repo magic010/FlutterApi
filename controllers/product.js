@@ -72,6 +72,7 @@ export const createProduct = asyncHandler(async (req, res) => {
     price,
     countInStock,
     thumbnail,
+    isFavorite,
   } = req.body.productData;
   const product = new Product({
     user: req.user._id,
@@ -83,6 +84,7 @@ export const createProduct = asyncHandler(async (req, res) => {
     price: price,
     countInStock: countInStock,
     thumbnail: thumbnail,
+    isFavorite: isFavorite,
   });
 
   try {
@@ -108,6 +110,7 @@ export const createMultipleProducts = asyncHandler(async (req, res) => {
       price,
       countInStock,
       thumbnail,
+      isFavorite,
     } = products[i];
     const product = new Product({
       user: req.user._id,
@@ -119,6 +122,7 @@ export const createMultipleProducts = asyncHandler(async (req, res) => {
       price: price,
       countInStock: countInStock,
       thumbnail: thumbnail,
+      isFavorite: isFavorite,
     });
 
     try {
@@ -144,6 +148,7 @@ export const updateProductByAdmin = asyncHandler(async (req, res) => {
     price,
     countInStock,
     thumbnail,
+    isFavorite,
   } = req.body.productData;
 
   const product = await Product.findById(req.params.id);
@@ -157,6 +162,7 @@ export const updateProductByAdmin = asyncHandler(async (req, res) => {
     product.price = price;
     product.countInStock = countInStock;
     product.thumbnail = thumbnail;
+    product.isFavorite = isFavorite;
 
     const updatedProduct = await product.save();
     res.json({ message: "Product updated successfully", updatedProduct });
@@ -186,4 +192,34 @@ export const getBrandsAndThumbnails = asyncHandler(async (req, res) => {
 export const getCategories = asyncHandler(async (req, res) => {
   const categories = await Product.find().distinct("category");
   res.json(categories);
+});
+
+export const checkProductIsFavorite = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    res.json({ isFavorite: product.isFavorite });
+  } else {
+    res.json({ message: "Product not found" });
+  }
+});
+
+export const toggleProductFavorite = asyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id);
+  if (product) {
+    product.isFavorite = !product.isFavorite;
+    const updatedProduct = await product.save();
+    res.json({ message: "Product updated successfully", updatedProduct });
+  } else {
+    res.json({ message: "Product not found" });
+  }
+});
+
+export const patchAllProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find();
+  for (let i = 0; i < products.length; i++) {
+    const product = products[i];
+    product.isFavorite = false;
+    await product.save();
+  }
+  res.json({ message: "All products updated successfully" });
 });

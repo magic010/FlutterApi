@@ -5,7 +5,7 @@ import {
   getAllProductsAdmin,
   getProductByIdAdmin,
   updateProductByAdmin,
-  createMultipleProducts,
+  patchAllProducts,
 } from "../controllers/product";
 
 import {
@@ -53,6 +53,6 @@ router
   .get(requireSignin, isAdmin, getProductByIdAdmin)
   .put(requireSignin, isAdmin, updateProductByAdmin);
 
-router.route("/product").post(requireSignin, isAdmin, createMultipleProducts);
+router.route("/product").post(requireSignin, isAdmin, patchAllProducts);
 
 export default router;

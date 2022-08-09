@@ -4,6 +4,7 @@ import {
   getProductById,
   getBrandsAndThumbnails,
   getCategories,
+  toggleProductFavorite,
 } from "../controllers/product";
 const router = express.Router();
 
@@ -24,6 +25,6 @@ router.route("/categories").get(getCategories);
 // @desc Fetch a product
 // @route GET /api/products/:id
 // @access Public
-router.route("/:id").get(getProductById);
+router.route("/:id").get(getProductById).post(toggleProductFavorite);
 
 export default router;
