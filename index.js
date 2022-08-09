@@ -26,8 +26,21 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(morgan("dev"));
 
-// route middlewares
-app.use("/api", authRoutes);
+// allowing cross-origin requests
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, x-access-token"
+  );
+  next();
+}),
+  // route middlewares
+  app.use("/api", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
