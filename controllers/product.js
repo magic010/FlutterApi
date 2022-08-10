@@ -191,7 +191,14 @@ export const getBrandsAndThumbnails = asyncHandler(async (req, res) => {
 
 export const getCategories = asyncHandler(async (req, res) => {
   const categories = await Product.find().distinct("category");
-  res.json(categories);
+
+  // key name and  value of category
+  const categoriesWithKey = [];
+  for (let i = 0; i < categories.length; i++) {
+    const category = categories[i];
+    categoriesWithKey.push({ key: "name", value: category });
+  }
+  res.json(getCategories);
 });
 
 export const checkProductIsFavorite = asyncHandler(async (req, res) => {
