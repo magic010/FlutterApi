@@ -196,7 +196,7 @@ export const getCategories = asyncHandler(async (req, res) => {
   const categoriesWithKey = [];
   for (let i = 0; i < categories.length; i++) {
     const category = categories[i];
-    categoriesWithKey.push({ key: "name", value: category });
+    categoriesWithKey.push({"name", category });
   }
   res.json(categoriesWithKey);
 });
