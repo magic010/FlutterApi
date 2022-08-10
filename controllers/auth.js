@@ -72,14 +72,14 @@ export const signin = async (req, res) => {
     // check if our db has user with that email
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({
+      return res.statusCode(400).json({
         error: "No user found",
       });
     }
     // check password
     const match = await comparePassword(password, user.password);
     if (!match) {
-      return res.status(401).json({
+      return res.statusCode(401).json({
         error: "Wrong password",
       });
     }
