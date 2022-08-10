@@ -198,7 +198,7 @@ export const getCategories = asyncHandler(async (req, res) => {
     const category = categories[i];
     categoriesWithKey.push({ key: "name", value: category });
   }
-  res.json(getCategories);
+  res.json(categoriesWithKey);
 });
 
 export const checkProductIsFavorite = asyncHandler(async (req, res) => {
