@@ -56,6 +56,7 @@ export const signup = async (req, res) => {
       return res.json({
         token,
         user: rest,
+        expiresIn: 7 * 24 * 60 * 60,
       });
     } catch (err) {
       console.log(err);
@@ -93,6 +94,7 @@ export const signin = async (req, res) => {
     res.json({
       token,
       user,
+      expiresIn: 7 * 24 * 60 * 60,
     });
   } catch (err) {
     console.log(err);
