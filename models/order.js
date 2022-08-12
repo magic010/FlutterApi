@@ -50,21 +50,14 @@ const orderSchema = mongoose.Schema(
         required: true,
       },
     },
-    paymentMethod: {
-      type: String,
-      default: "Razorpay",
-    },
+
     paymentResult: {
       id: { type: String },
       status: { type: String },
       update_time: { type: String },
       email_address: { type: String },
     },
-    razorpay: {
-      orderId: String,
-      paymentId: String,
-      signature: String,
-    },
+
     taxPrice: {
       type: Number,
       required: true,

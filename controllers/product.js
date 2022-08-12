@@ -189,6 +189,30 @@ export const getBrandsAndThumbnails = asyncHandler(async (req, res) => {
   res.json(brandsAndThumbnails);
 });
 
+export const getBrandsWithProducts = asyncHandler(async (req, res) => {
+  const brands = await Product.find().distinct("brand");
+
+  const brandsWithProducts = [];
+  for (let i = 0; i < brands.length; i++) {
+    const brand = brands[i];
+    const products = await Product.find({ brand: brand });
+    brandsWithProducts.push({ brand, products });
+  }
+  res.json(brandsWithProducts);
+});
+
+export const getCategoriesWithProducts = asyncHandler(async (req, res) => {
+  const categories = await Product.find().distinct("category");
+
+  const categoriesWithProducts = [];
+  for (let i = 0; i < categories.length; i++) {
+    const category = categories[i];
+    const products = await Product.find({ category: category });
+    categoriesWithProducts.push({ category, products });
+  }
+  res.json(categoriesWithProducts);
+});
+
 export const getCategories = asyncHandler(async (req, res) => {
   const categories = await Product.find().distinct("category");
 

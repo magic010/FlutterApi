@@ -5,6 +5,8 @@ import {
   getBrandsAndThumbnails,
   getCategories,
   toggleProductFavorite,
+  getBrandsWithProducts,
+  getCategoriesWithProducts,
 } from "../controllers/product";
 const router = express.Router();
 
@@ -22,6 +24,8 @@ router.route("/").get();
 
 router.route("/brands").get(getBrandsAndThumbnails);
 router.route("/categories").get(getCategories);
+router.route("/brandswithproducts").get(getBrandsWithProducts);
+router.route("/categorieswithproducts").get(getCategoriesWithProducts);
 // @desc Fetch a product
 // @route GET /api/products/:id
 // @access Public
